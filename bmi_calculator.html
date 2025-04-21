@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BMI Calculator - Calculate your Body Mass Index with a stylish and simple interface.">
+    <meta name="keywords" content="BMI, Body Mass Index, Fitness, Health Calculator, Instagram style">
+    <title>Instagram Style BMI Calculator</title>
+    
+    <!-- Heart Emoji as Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' width='16' height='16'><path fill='%23FF0000' d='M8 12s4-3 4-5c0-1.1-.9-2-2-2-1.1 0-2 .9-2 2s-1 2-2 2-2-.9-2-2c0-1.1-.9-2-2-2-1.1 0-2 .9-2 2 0 2 4 5 4 5z'/></svg>" type="image/svg+xml">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #FAD0C4, #FDCB82, #D4A5A5);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            font-size: 1.2rem;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+            margin: 10px 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        input[type="button"] {
+            background: linear-gradient(135deg, #FDCB82, #D4A5A5);
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #FFF;
+            border-radius: 10px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background: linear-gradient(135deg, #D4A5A5, #FDCB82);
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            color: #FFF;
+        }
+
+        .reason {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #FFF;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>BMI Calculator</h1>
+
+    <div class="input-container">
+        <input type="number" id="weight" placeholder="Enter your weight (kg)" />
+    </div>
+
+    <div class="input-container">
+        <input type="number" id="height" placeholder="Enter your height (cm)" />
+    </div>
+
+    <div class="input-container">
+        <input type="button" value="Calculate BMI" onclick="calculateBMI()" />
+    </div>
+
+    <div class="result" id="result"></div>
+    <div class="reason" id="reason"></div>
+</div>
+
+<script>
+    function calculateBMI() {
+        let weight = parseFloat(document.getElementById("weight").value);
+        let height = parseFloat(document.getElementById("height").value);
+
+        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+            alert("Please enter valid weight and height values.");
+            return;
+        }
+
+        // Convert height from cm to meters
+        height = height / 100;
+
+        // Correct BMI calculation: BMI = weight (kg) / height² (m²)
+        let bmi = weight / (height * height);
+        let bmiResult = bmi.toFixed(1);
+        let category = '';
+        let reason = '';
+
+        // Categories based on BMI value
+        if (bmi < 18.5) {
+            category = 'Underweight';
+            reason = 'Your BMI indicates that you are underweight. Please consult a healthcare professional for personalized advice.';
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            category = 'Normal weight';
+            reason = 'Great job! Your BMI indicates that you have a healthy weight. Keep up the good work!';
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            category = 'Overweight';
+            reason = 'Your BMI suggests that you are overweight. Consider adopting a balanced diet and regular exercise to reach a healthier weight.';
+        } else {
+            category = 'Obese';
+            reason = 'Your BMI indicates obesity. It\'s highly recommended to consult with a healthcare provider for a weight management plan.';
+        }
+
+        // Display results
+        document.getElementById("result").innerHTML = `Your BMI: ${bmiResult} (${category})`;
+        document.getElementById("reason").innerHTML = reason;
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
